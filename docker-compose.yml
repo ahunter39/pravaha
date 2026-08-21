@@ -7,7 +7,6 @@ services:
       POSTGRES_USER: pravaha
       POSTGRES_PASSWORD: pravaha
       POSTGRES_DB: pravaha
-    ports:
     volumes:
       - pravaha-pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -20,7 +19,6 @@ services:
     image: redis:7-alpine
     container_name: pravaha-redis
     restart: unless-stopped
-    ports:
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -61,3 +59,5 @@ services:
 
 volumes:
   pravaha-pgdata:
+    external: true
+    name: pravaha_pravaha-pgdata
