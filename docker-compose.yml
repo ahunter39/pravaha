@@ -45,18 +45,19 @@ services:
         condition: service_healthy
 
   web:
-    build:
-      context: ./web
-      dockerfile: Dockerfile
-    container_name: pravaha-web
-    restart: unless-stopped
-    ports:
-      - "3080:3000"
-    environment:
+  build:
+    context: ./web
+    dockerfile: Dockerfile
+    args:
       NEXT_PUBLIC_API_URL: http://100.79.129.15:4000
-    depends_on:
-      - api
-
+  container_name: pravaha-web
+  restart: unless-stopped
+  ports:
+    - "3080:3000"
+  environment:
+    NEXT_PUBLIC_API_URL: http://100.79.129.15:4000
+  depends_on:
+    - api
 volumes:
   pravaha-pgdata:
     external: true
